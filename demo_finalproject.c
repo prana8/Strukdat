@@ -8,8 +8,7 @@ struct List
     int saldo;
 };
 void penyimpanan(int n, List uang){
-    printf("\n\n========================\n");
-    printf("Masukan Jublah Uang : ");
+    printf("Masukan Jublah Uang : Rp. ");
     scanf("%d", &uang.saldo);
     printf("Uang berhasil tersimpan!!!\n");
     printf("Jumblah Saldo : %d\n", uang.saldo);
@@ -22,6 +21,7 @@ void penyimpanan(int n, List uang){
 int main(){
     int bahasa, menu, n;
     List uang;
+    char yn;
     
     printf("========================\n");
     printf("=     Program Atm      =\n");
@@ -38,6 +38,7 @@ int main(){
     switch (bahasa)
     {
     case 1:
+    awal:
     system("cls");
     printf("========================\n");
     printf("=     Program ATM      =\n");
@@ -53,6 +54,24 @@ int main(){
     if (menu==2)
     {
         penyimpanan(n, uang);
+        lanjut:
+        printf("Lanjutkan Transaksi?? (y/n) : ");
+        scanf("%c", &yn);
+        if ((yn == 'y' || yn == 'Y'))
+        {
+            goto awal;
+        }
+        else if ((yn == 'n' || yn == 'N'))
+        {
+            break;
+        }
+        else
+        {
+            goto lanjut;
+        }
+        
+        
+        
     }
     
 
