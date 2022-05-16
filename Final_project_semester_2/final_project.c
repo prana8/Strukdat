@@ -190,7 +190,7 @@ void transfer(tree *roorPtr, int noAtmAsal) {  // rootPtr agar bisa search bst
     scanf("%d", &nominal);
 
     // print data, minta confirmasi
-    struct tm *Sya_T;                                      //final project ryan prana & sankya 
+    struct tm *Sya_T;                                      //Untuk local time
     time_t Tval;
     Tval = time(NULL);
     Sya_T = localtime(&Tval);
@@ -238,7 +238,7 @@ int main(){
     tree *rootPtr = NULL;
 
     // untuk local time
-    struct tm *Sya_T;                                      //final project ryan prana & sankya 
+    struct tm *Sya_T;                                    
     time_t Tval;
     Tval = time(NULL);
     Sya_T = localtime(&Tval);
