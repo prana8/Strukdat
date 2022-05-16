@@ -186,7 +186,7 @@ void transfer(tree *roorPtr, int noAtmAsal) {  // rootPtr agar bisa search bst
 
     // input nominal
     int nominal;
-    printf("Masukan Nominal yang ingin di transfer : ");
+    printf("Masukan Nominal yang ingin di transfer : Rp.");
     scanf("%d", &nominal);
 
     // print data, minta confirmasi
@@ -196,6 +196,7 @@ void transfer(tree *roorPtr, int noAtmAsal) {  // rootPtr agar bisa search bst
     Sya_T = localtime(&Tval);
     tree *penerima = search(roorPtr, noTujuan);
     tree *asal = search(roorPtr, noAtmAsal);
+    system("cls");
     printf("  =========================================\n");
     printf("  <--------- Konfirmasi Transaksi -------->\n");
     printf("  =========================================\n");
@@ -205,10 +206,10 @@ void transfer(tree *roorPtr, int noAtmAsal) {  // rootPtr agar bisa search bst
     printf("   Rekening Tujuan : %d \n", penerima->no_ATM);
     printf("   Nama Tujuan : %s\n", penerima->nama);
     printf("  -----------------------------------------\n");
-    printf("   Nominal : %d\n", nominal);
-    printf("   Tax     : 5000 \n", nominal);
+    printf("   Nominal : Rp.%d\n", nominal);
+    printf("   Tax     : Rp.5000 \n", nominal);
     printf("  -----------------------------------------\n");
-    printf("   Total : %d \n", nominal + 5000);
+    printf("   Total : Rp.%d \n", nominal + 5000);
     printf("  =========================================\n");
     
     int konfirm;
@@ -327,7 +328,7 @@ int main(){
         printf("||=========================================||\n");
         printf("   Tanggal : %d/%d/%d \n", Sya_T->tm_mday, Sya_T->tm_mon+1, 1900+Sya_T->tm_year);
         printf("||-----------------------------------------||\n");
-        printf("   Saldo Anda : %d \n", saldo);
+        printf("   Saldo Anda : Rp.%d \n", saldo);
         printf("||=========================================||\n");
 
         break;
@@ -347,8 +348,8 @@ int main(){
                 printf("||=========================================||\n");
                 printf("   Tanggal : %d/%d/%d \n", Sya_T->tm_mday, Sya_T->tm_mon+1, 1900+Sya_T->tm_year);
                 printf("||-----------------------------------------||\n");
-                printf("   Nominal : %d\n", nominal);
-                printf("   Totals saldo : %d\n", saldo);
+                printf("   Nominal : Rp.%d\n", nominal);
+                printf("   Total saldo : Rp.%d\n", saldo);
                 printf("||-----------------------------------------||\n");
                 printf("||   Deposit Yang Anda masukan berhasil    ||\n");
                 printf("||   <---------> Dideposit <---------->    ||\n");
@@ -371,8 +372,20 @@ int main(){
             //cek valid atau tidak
             if (cek(nominal)){
                 printf("\nNominal valid\n");
+                system("cls");
                 kurangi_saldo(data_user->no_ATM, nominal);
-                printf("\nPena Berhasil!!\n");
+                saldo = cek_saldo(data_user->no_ATM);
+                printf("||========================================||\n");
+                printf("   Tanggal : %d/%d/%d \n", Sya_T->tm_mday, Sya_T->tm_mon+1, 1900+Sya_T->tm_year);
+                printf("   No. Rekening : %d\n",noAtm);
+                printf("||----------------------------------------||\n");
+                printf("|| Tarik Tunai                            ||\n");
+                printf("||----------------------------------------||\n");
+                printf("   Jumlah : Rp.%d\n", nominal);
+                printf("   Saldo  : Rp.%d\n", saldo);
+                printf("||----------------------------------------||\n");
+                printf("||########## Transaksi Berhasil ##########||\n");
+                printf("||========================================||\n");
             } else
             {
                 printf("\nNominal Tidak Valid!!\n");
