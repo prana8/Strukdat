@@ -238,6 +238,7 @@ void transfer(tree *roorPtr, int noAtmAsal) {  // rootPtr agar bisa search bst
     
 }
 
+// untuk saldo minimal di dalam tabungan
 bool minimalSaldo (struct tree *data, int nominal){
     int total = data->saldo-nominal;
     if(total<100000){
@@ -252,7 +253,8 @@ void header(){
     printf("|| **************  ATM BANK *************** ||\n");
     printf("||==========================================||\n");
 }
-
+ 
+ // fungsi untuk pengatur jumlbah pecahan yang keluar
 void pecahan(int nominal) {
     int total, batas=3; // total semua pecahan uang
     do {
