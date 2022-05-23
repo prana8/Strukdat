@@ -215,18 +215,21 @@ void transfer(tree *roorPtr, int noAtmAsal) {  // rootPtr agar bisa search bst
     printf("   Nama Tujuan : %s\n", penerima->nama);
     printf("  -----------------------------------------\n");
     printf("   Nominal : Rp.%d\n", nominal);
-    printf("   Tax     : Rp.5000 \n", nominal);
     printf("  -----------------------------------------\n");
-    printf("   Total : Rp.%d \n", nominal + 5000);
+    printf("   Total : Rp.%d \n", nominal);
     printf("  =========================================\n");
     
     int konfirm;
+    printf(" tekan [1] untuk meneruskan, [0] untuk batal : ");
+    scanf("%d", &konfirm);
+
     if(konfirm != 1){
-        printf("\n Transaksi Batal");
+        printf("\n Transaksi Batal, ");
     } else{
-        if (kurangi_saldo(noAtmAsal, nominal) == 1){
+        if (konfirm == 1){
+            kurangi_saldo(noAtmAsal, nominal);
             tambah_saldo(noTujuan, nominal);
-            printf("\nTransaksi Berhasil!!");
+            printf("\n Transaksi Berhasil!!\n");
         } else {
             printf("\nTransakasi Gagal");
         }
