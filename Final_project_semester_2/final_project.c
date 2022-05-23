@@ -6,11 +6,19 @@
 #define MAXSTACK 20
 #define JML_PECAHAN 4
 
+int uang[JML_PECAHAN][JML_PECAHAN] = {
+    {20000, 0},
+    {50000, 0},
+    {75000, 0},
+    {100000, 0}
+};
+
 // deklarasi untuk menampung data menggunakan tree atau pohon
 typedef struct tree
 {
     int no_ATM;
     int PIN;
+    int saldo;
     char nama[35];
     char alamat[40];
     struct tree *left;
@@ -227,10 +235,48 @@ void transfer(tree *roorPtr, int noAtmAsal) {  // rootPtr agar bisa search bst
     
 }
 
+bool minimalSaldo (struct tree *data, int nominal){
+    int total = data->saldo-nominal;
+    if(total<100000){
+        return false;
+    } else{
+        return true;
+    }
+}
+
 void header(){
     printf("||==========================================||\n");
     printf("|| **************  ATM BANK *************** ||\n");
     printf("||==========================================||\n");
+}
+
+void pecahan(int nominal) {
+    int total, batas=3; // total semua pecahan uang
+    do {
+
+        total = 0;
+        for(int i = 3; i >= 0; i--){
+            printf(" >>> Pecahan %-6d sebanyak : ", uang[i][0]);
+            scanf("%d", &uang[i][1]);
+
+            // hitung total uang
+            // kalikan pecahan dgn jml pecahannya
+            total += (uang[i][0] * uang[i][1]);
+        }
+        printf("\n");
+        if(total != nominal){
+            batas--;
+            printf(" >>> Total uang tidak sesuai silakan ulang . . .\n\n");
+        } else {
+            printf(" >>> Transaksi berhasil <<<\n\n");
+        }
+        if(batas==0){
+            printf("      >>> Transaksi gagal <<<\n");
+            printf(" >>> Anda sudah melampaui batas <<<\n\n");
+            return;
+        }
+
+    }while(total != nominal);
 }
 
 
@@ -324,10 +370,14 @@ int main(){
     switch (pilih1){
     case 1: // cek saldo
 
+        system("cls");
         saldo = cek_saldo(data_user->no_ATM);
+        printf("||=========================================||\n");
+        printf("|| **************  ATM BANK ************** ||\n");
         printf("||=========================================||\n");
         printf("   Tanggal : %d/%d/%d \n", Sya_T->tm_mday, Sya_T->tm_mon+1, 1900+Sya_T->tm_year);
         printf("||-----------------------------------------||\n");
+        printf("   nama       : %s \n", data_user->nama);
         printf("   Saldo Anda : Rp.%d \n", saldo);
         printf("||=========================================||\n");
 
@@ -368,6 +418,7 @@ int main(){
         {
             printf("Masukan Nominal Yang Ingin Di Tarik : ");
             scanf("%d", &nominal);
+            pecahan(nominal);
 
             //cek valid atau tidak
             if (cek(nominal)){
@@ -413,7 +464,6 @@ int main(){
     return 0;
     
 }
-
 
 
 
